@@ -13,7 +13,7 @@ module.exports = {
                 message.reply("timer stopped.");
                 running = false;
             }else{
-                message.reply("a timer is already active");
+                message.reply("a timer is already running.");
             }
         }else{
             running = true;

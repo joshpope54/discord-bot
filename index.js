@@ -30,9 +30,10 @@ client.on('message', message => {
       const steamAddress = message.content;
       if(steamAddress.startsWith('https://store.steampowered.com/app')){
         message.reply('steam games belong in <#706245049687605281>. Your game has been reposted by me.');
-        message.delete();
-        const channel = client.channels.cache.get('706245049687605281');
-        channel.send('<@'+message.author.id+'> linked: ' + steamAddress);
+        message.delete({ timeout: 1500}).then(msg => function(){
+          const channel = client.channels.cache.get('706245049687605281');
+          channel.send('<@'+message.author.id+'> linked: ' + steamAddress);
+        });
       }
     }else{
       return;

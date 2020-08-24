@@ -21,11 +21,18 @@ client.on('message', message => {
     if(message.channel.id === '706245049687605281' && !message.author.bot){
       const steamAddress = message.content;
       if(!steamAddress.startsWith('https://store.steampowered.com/app')){
-        message.delete({timeout: 5000})
+        message.delete({timeout: 5000});
         message.reply('that was not a valid steam game address').then(sent => { // 'sent' is that message you just sent
           sent.delete({ timeout: 5000});
         }).catch(console.error);
-
+      }
+    }else if (message.channel.id === '258693667332554753' && !message.author.bot){
+      const steamAddress = message.content;
+      if(!steamAddress.startsWith('https://store.steampowered.com/app')){
+        message.reply('steam games belong in <#706245049687605281>. Your game has been reposted by me.');
+        message.delete();
+        const channel = client.channels.cache.get('706245049687605281');
+        channel.send(steamAddress);
       }
     }else{
       return;

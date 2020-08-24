@@ -32,7 +32,7 @@ client.on('message', message => {
         message.reply('steam games belong in <#706245049687605281>. Your game has been reposted by me.');
         message.delete();
         const channel = client.channels.cache.get('706245049687605281');
-        channel.send(steamAddress);
+        channel.send('<@'+message.author.id+'> linked: ' + steamAddress);
       }
     }else{
       return;

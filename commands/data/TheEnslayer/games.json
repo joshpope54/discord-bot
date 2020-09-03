@@ -1,0 +1,132 @@
+[
+  {
+    "gameId": 4794762177,
+    "stats": {
+      "win": true,
+      "kills": 9,
+      "deaths": 12,
+      "assists": 16,
+      "kp": 0.5319148936170213
+    }
+  },
+  {
+    "gameId": 4794637884,
+    "stats": {
+      "win": false,
+      "kills": 9,
+      "deaths": 7,
+      "assists": 10,
+      "kp": 0.4318181818181818
+    }
+  },
+  {
+    "gameId": 4794326397,
+    "stats": {
+      "win": true,
+      "kills": 7,
+      "deaths": 5,
+      "assists": 9,
+      "kp": 0.45714285714285713
+    }
+  },
+  {
+    "gameId": 4794304646,
+    "stats": {
+      "win": false,
+      "kills": 0,
+      "deaths": 0,
+      "assists": 0,
+      "kp": null
+    }
+  },
+  {
+    "gameId": 4794298868,
+    "stats": {
+      "win": true,
+      "kills": 11,
+      "deaths": 0,
+      "assists": 15,
+      "kp": 0.6842105263157895
+    }
+  },
+  {
+    "gameId": 4794066708,
+    "stats": {
+      "win": false,
+      "kills": 3,
+      "deaths": 13,
+      "assists": 17,
+      "kp": 0.43478260869565216
+    }
+  },
+  {
+    "gameId": 4792904995,
+    "stats": {
+      "win": false,
+      "kills": 10,
+      "deaths": 4,
+      "assists": 9,
+      "kp": 0.5428571428571428
+    }
+  },
+  {
+    "gameId": 4792852814,
+    "stats": {
+      "win": false,
+      "kills": 7,
+      "deaths": 1,
+      "assists": 7,
+      "kp": 0.42424242424242425
+    }
+  },
+  {
+    "gameId": 4791725133,
+    "stats": {
+      "win": true,
+      "kills": 3,
+      "deaths": 7,
+      "assists": 5,
+      "kp": 0.23529411764705882
+    }
+  },
+  {
+    "gameId": 4791121125,
+    "stats": {
+      "win": true,
+      "kills": 10,
+      "deaths": 3,
+      "assists": 9,
+      "kp": 0.4523809523809524
+    }
+  },
+  {
+    "gameId": 4790987336,
+    "stats": {
+      "win": true,
+      "kills": 6,
+      "deaths": 10,
+      "assists": 14,
+      "kp": 0.43478260869565216
+    }
+  },
+  {
+    "gameId": 4790919738,
+    "stats": {
+      "win": false,
+      "kills": 9,
+      "deaths": 7,
+      "assists": 17,
+      "kp": 0.48148148148148145
+    }
+  },
+  {
+    "gameId": 4790912450,
+    "stats": {
+      "win": false,
+      "kills": 4,
+      "deaths": 8,
+      "assists": 19,
+      "kp": 0.5111111111111111
+    }
+  }
+]

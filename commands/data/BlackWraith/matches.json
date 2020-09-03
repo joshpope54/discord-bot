@@ -1,0 +1,162 @@
+[
+  {
+    "platformId": "EUW1",
+    "gameId": 4794762177,
+    "champion": 164,
+    "queue": 440,
+    "season": 13,
+    "timestamp": 1599087435020,
+    "role": "SOLO",
+    "lane": "TOP"
+  },
+  {
+    "platformId": "EUW1",
+    "gameId": 4794637884,
+    "champion": 10,
+    "queue": 440,
+    "season": 13,
+    "timestamp": 1599085102683,
+    "role": "SOLO",
+    "lane": "TOP"
+  },
+  {
+    "platformId": "EUW1",
+    "gameId": 4794326397,
+    "champion": 39,
+    "queue": 440,
+    "season": 13,
+    "timestamp": 1599073346737,
+    "role": "SOLO",
+    "lane": "TOP"
+  },
+  {
+    "platformId": "EUW1",
+    "gameId": 4794304646,
+    "champion": 164,
+    "queue": 440,
+    "season": 13,
+    "timestamp": 1599072676435,
+    "role": "DUO",
+    "lane": "NONE"
+  },
+  {
+    "platformId": "EUW1",
+    "gameId": 4794298868,
+    "champion": 164,
+    "queue": 440,
+    "season": 13,
+    "timestamp": 1599070829737,
+    "role": "SOLO",
+    "lane": "TOP"
+  },
+  {
+    "platformId": "EUW1",
+    "gameId": 4794066708,
+    "champion": 164,
+    "queue": 440,
+    "season": 13,
+    "timestamp": 1599061916139,
+    "role": "SOLO",
+    "lane": "TOP"
+  },
+  {
+    "platformId": "EUW1",
+    "gameId": 4792974851,
+    "champion": 84,
+    "queue": 420,
+    "season": 13,
+    "timestamp": 1599007826254,
+    "role": "SOLO",
+    "lane": "TOP"
+  },
+  {
+    "platformId": "EUW1",
+    "gameId": 4792952288,
+    "champion": 164,
+    "queue": 420,
+    "season": 13,
+    "timestamp": 1599005016898,
+    "role": "SOLO",
+    "lane": "TOP"
+  },
+  {
+    "platformId": "EUW1",
+    "gameId": 4792904995,
+    "champion": 164,
+    "queue": 440,
+    "season": 13,
+    "timestamp": 1599001510091,
+    "role": "NONE",
+    "lane": "JUNGLE"
+  },
+  {
+    "platformId": "EUW1",
+    "gameId": 4792852814,
+    "champion": 164,
+    "queue": 440,
+    "season": 13,
+    "timestamp": 1598999609014,
+    "role": "SOLO",
+    "lane": "TOP"
+  },
+  {
+    "platformId": "EUW1",
+    "gameId": 4791725133,
+    "champion": 164,
+    "queue": 440,
+    "season": 13,
+    "timestamp": 1598969851223,
+    "role": "SOLO",
+    "lane": "TOP"
+  },
+  {
+    "platformId": "EUW1",
+    "gameId": 4791121125,
+    "champion": 38,
+    "queue": 440,
+    "season": 13,
+    "timestamp": 1598914851342,
+    "role": "SOLO",
+    "lane": "MID"
+  },
+  {
+    "platformId": "EUW1",
+    "gameId": 4790987336,
+    "champion": 84,
+    "queue": 440,
+    "season": 13,
+    "timestamp": 1598912061440,
+    "role": "SOLO",
+    "lane": "MID"
+  },
+  {
+    "platformId": "EUW1",
+    "gameId": 4790919738,
+    "champion": 164,
+    "queue": 440,
+    "season": 13,
+    "timestamp": 1598909402795,
+    "role": "SOLO",
+    "lane": "TOP"
+  },
+  {
+    "platformId": "EUW1",
+    "gameId": 4790912450,
+    "champion": 164,
+    "queue": 440,
+    "season": 13,
+    "timestamp": 1598906688618,
+    "role": "SOLO",
+    "lane": "TOP"
+  },
+  {
+    "platformId": "EUW1",
+    "gameId": 4789309861,
+    "champion": 164,
+    "queue": 420,
+    "season": 13,
+    "timestamp": 1598833925664,
+    "role": "SOLO",
+    "lane": "TOP"
+  }
+]

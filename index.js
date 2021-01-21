@@ -5,7 +5,7 @@ const { prefix, token, steamToken, steamID } = require('./config.json');
 const fetch = require('node-fetch');
 client.commands = new Discord.Collection();
 const LeagueJs = require('leaguejs');
-const api = new LeagueJs('', { PLATFORM_ID: 'euw1' });
+const api = new LeagueJs('RGAPI-99ed095b-9050-4f58-a21b-8e48e55082cc', { PLATFORM_ID: 'euw1' });
 const commandFiles = fs.readdirSync('./commands').filter(file => file.endsWith('.js'));
 var mysql = require('mysql');
 var con = mysql.createConnection({
@@ -13,7 +13,6 @@ var con = mysql.createConnection({
     port: "3306",
     user: "root",
     password: "",
-
     database: "discordbot"
 });
 
@@ -197,7 +196,7 @@ client.on('message', message => {
     }
 
     try {
-        if (commandName === "league") {
+        if (commandName === "league" || commandName === "league2") {
             console.log("kda executed")
             command.execute(message, args, api);
         } else {

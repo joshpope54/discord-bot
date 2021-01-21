@@ -118,7 +118,7 @@ const con = {
     host: "localhost",
     port: "3306",
     user: "root",
-    password: "",
+    password: "JP54MySQL#DevServer",
     database: "discordbot"
 };
 
@@ -126,35 +126,32 @@ async function getLatestGames(api, message){
     var db = makeDb(con);
     try {
         const users = await db.query("SELECT * FROM users")
-        for(i in users){
-            var {accountId, name} = users[i]
+        var mapped = users.map(async user => {
+            var {accountId, name} = user;
             var query = "SELECT MAX(timestamp) AS timestamp, matches.accountId, users.name FROM matches JOIN users on matches.accountId=users.accountId WHERE matches.accountId = '"+accountId+"'"
             var response = await db.query(query)
+            //console.log("USER " + accountId + " " + name)
             var allMatches = await gatherGames(api, response[0].timestamp,response[0].accountId )
-            console.log("USER " + accountId + " " + name)
-            if(allMatches.length===0){
-                console.log("going to next")
-                continue;
-            }else{
+            //console.log("USER " + accountId + " " + name + " GAMES GATHERED")
+            if(allMatches.length!==0){
                 for(i in allMatches){
                     var sql = "INSERT INTO matches (accountId,platformId,gameId,champion,season,queue,timestamp,role,lane) VALUES ('"+accountId+"','"+allMatches[i].platformId+"',"+allMatches[i].gameId+","+allMatches[i].champion+","+allMatches[i].season+","+allMatches[i].queue+","+allMatches[i].timestamp+",'"+allMatches[i].role+"','"+allMatches[i].lane+"')";
                     await db.query(sql);
                 }
-    
                 const allMatchesAsGames = allMatches.map(({ gameId }) => requests(5, gameId, i,api))
                 var allGames = await Promise.all(allMatchesAsGames)
                 var newResults = allGames.map(function (x){
                     return ignoreUselessData(x,name);
                 });
-    
                 for(j in newResults){
                     var sql = "INSERT INTO games (accountId,gameId,win,kills,assists,deaths,kda,kp,totalMinionsKilled,totalDamageDealtToChampions,goldEarned,totalHeal,totalDamageTaken) VALUES ('"+accountId+"',"+newResults[j].gameId+",'"+newResults[j].stats.win+"',"+newResults[j].stats.kills+","+newResults[j].stats.assists+","+newResults[j].stats.deaths+","+newResults[j].stats.kda+","+newResults[j].stats.kp+","+newResults[j].stats.totalMinionsKilled+","+newResults[j].stats.totalDmgToChamps+","+newResults[j].stats.goldEarned+","+newResults[j].stats.totalHeal+","+newResults[j].stats.totalDamageTaken+")";
                     await db.query(sql)
                 }
-                console.log("done")
             }
-        }
-        // do something with someRows and otherRows
+        });
+        await Promise.all(mapped);
+
+        
     } catch ( err ) {
         // handle the error
         console.log(err);
@@ -167,36 +164,39 @@ async function generateLeaderboard(api, message, args, propertyToBeUsed){
     var db = makeDb(con);
     try {
         const users = await db.query("SELECT * FROM users")
-        var leaderboard = []
-        for(i in users){
-            var {name,accountId,profileIconId,summonerLevel} = await api.Summoner.gettingByName(users[i].name);
+
+
+        var mapped = users.map(async user => {
+            var {name,accountId,profileIconId,summonerLevel} = await api.Summoner.gettingByName(user.name);
             await db.query("UPDATE users SET `profileIconId`='"+profileIconId+"',`summonerLevel`='"+summonerLevel+"' WHERE users.accountId='"+accountId+"'")
             var query = "SELECT users.name, users.profileIconId, matches.accountId, games.gameId, games.win, games.kills, games.deaths, games.assists, games.kda, games.kp, games.totalMinionsKilled,games.totalDamageDealtToChampions,games.goldEarned,games.totalHeal,games.totalDamageTaken, matches.champion FROM matches JOIN games ON games.accountId=matches.accountId AND games.gameId=matches.gameId JOIN users on matches.accountId=users.accountId WHERE `timestamp`>="+currentWeek+" AND users.accountId='"+accountId+"'";
             var userResults = await db.query(query);
             if(userResults.length===0){
                 var obj = {summoner:name,profileIconId:profileIconId,stat:0,match:'-1'}
-                leaderboard.push(obj);
+                return obj
             }else{
                 if(args[0]==="wr"){
                     var obj = {summoner:name,profileIconId:profileIconId,stat:toFixed(getWinRatio(userResults),2),match:'-1'}
-                    leaderboard.push(obj);
+                    return obj
                 }else{
                     if(args[1] === "average"){
                         var average = getAverage(userResults, propertyToBeUsed);
                         var obj = {summoner:name,profileIconId:profileIconId,stat:average,match:'-1'}
-                        leaderboard.push(obj);
+                        return obj
                     }else if (args[1] === "max"){
                         var max = getMax(userResults, propertyToBeUsed);
                         var obj = {summoner:name,profileIconId:profileIconId,stat:toFixed(max[propertyToBeUsed],2),match:max.gameId}
-                        leaderboard.push(obj);
+                        return obj
                     }else if (args[1] === "sum"){
                         var sum = getSum(userResults, propertyToBeUsed);
                         var obj = {summoner:name,profileIconId:profileIconId,stat:sum,match:'-1'}
-                        leaderboard.push(obj);
+                        return obj
                     }
                 }
             }
-        }
+        });
+        var leaderboard = []
+        var leaderboard = await Promise.all(mapped);
         leaderboard.unshift(message)
 
         // do something with someRows and otherRows
@@ -278,7 +278,7 @@ module.exports = {
     usage: '<kda/kp/cs> {average/max}',
     args: true,
 	execute(message, args, api) {
-        if(Date.now()> currentWeek+604800000 ){
+        while(Date.now()> currentWeek+604800000 ){
             currentWeek += 604800000;
         }
         var propertyToBeUsed = "";
@@ -354,9 +354,14 @@ module.exports = {
             .setThumbnail("https://cdn.discordapp.com/attachments/110373943822540800/235649976192073728/4AyCE.png")
             .setDescription('This Message will be edited with the result.')
 
+        
         message.channel.send(embed).then(message => {
+            console.time()
             getLatestGames(api, message).then(message => {
+                console.timeEnd();
+                console.time();
                 generateLeaderboard(api, message, args, propertyToBeUsed).then(leaderboard => {
+                    console.timeEnd();
                     var message = leaderboard.shift();
                     
                     leaderboard = leaderboard.sort(function(a, b){return b.stat-a.stat});
@@ -376,6 +381,7 @@ module.exports = {
                         }
                     }
                     message.edit(embed);
+                    console.timeEnd("TIME TAKEN")
                 })
                 // const connection = mysql.createConnection({
                 //     host: "localhost",
